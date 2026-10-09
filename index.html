@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ilham Maulana · Android Developer</title>
+<meta name="description" content="Portofolio Ilham Maulana, Android Developer dari Bekasi. Kotlin, Jetpack Compose, dan KMP. Pengalaman kerja, proyek, sertifikat, dan tulisan.">
+<meta name="author" content="Ilham Maulana">
+<link rel="canonical" href="https://ilhamaulnaa.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ilham Maulana · Android Developer">
+<meta property="og:description" content="Portofolio Ilham Maulana, Android Developer dari Bekasi. Kotlin, Jetpack Compose, dan KMP. Pengalaman kerja, proyek, sertifikat, dan tulisan.">
+<meta property="og:url" content="https://ilhamaulnaa.github.io/">
+<meta name="theme-color" content="#E8EDF3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1322" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='17' fill='%23C4105C'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23fff'%3EIM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Martian+Mono:wght@400;500;600&display=swap">
+<style>
+/* Dasar halaman */
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none !important}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Layout: lembar spesifikasi aplikasi. Hero = teks kiri + perangkat beranotasi garis ukur di kanan;
+   bagian lain = lajur label sempit di kiri, isi lebar di kanan, seperti catatan rilis. */
+:root{
+  --paper:#E8EDF3; --surface:#F6F8FB; --ink:#101A2E; --ink-2:#4B5872; --line:#C5CEDB;
+  --redline:#C4105C; --blue:#2447D6; --on-accent:#FFFFFF;
+  --bezel:#101A2E; --screen:#F6F8FB; --shadow:rgba(16,26,46,.38);
+  --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Martian Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --t-hero:clamp(2.6rem,7vw,5.1rem); --t-h2:clamp(1.7rem,3.4vw,2.4rem); --t-h3:1.2rem;
+  --t-body:1.0625rem; --t-small:.9rem; --t-label:.68rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1322; --surface:#151D31; --ink:#E9EEF7; --ink-2:#9BA7C0; --line:#2B3654;
+    --redline:#FF6FA8; --blue:#8AA4FF; --on-accent:#0D1322;
+    --bezel:#04070D; --screen:#151D31; --shadow:rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1322; --surface:#151D31; --ink:#E9EEF7; --ink-2:#9BA7C0; --line:#2B3654;
+  --redline:#FF6FA8; --blue:#8AA4FF; --on-accent:#0D1322;
+  --bezel:#04070D; --screen:#151D31; --shadow:rgba(0,0,0,.7); color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:var(--t-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--redline);outline-offset:3px;border-radius:4px}
+
+/* Dua bahasa: tiap teks ditulis dua kali (lang="id" dan lang="en"), salah satunya disembunyikan */
+.site:not([data-lang="en"]) [lang="en"],
+.site[data-lang="en"] [lang="id"]{display:none !important}
+
+.site{padding-inline:clamp(16px,4vw,48px)}
+.wrap{max-width:1120px;margin-inline:auto}
+.mono{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.04em;text-transform:uppercase}
+
+
+/* ---------- Header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);border-bottom:1px solid var(--line);margin-inline:calc(clamp(16px,4vw,48px) * -1);padding-inline:clamp(16px,4vw,48px)}
+.top-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.5rem;padding-block:.8rem}
+.brand{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none;margin-right:auto}
+.brand i{font-style:normal;color:var(--redline)}
+.nav{display:flex;gap:1.4rem;font-size:var(--t-small);font-weight:500}
+.nav a{text-decoration:none;color:var(--ink-2);padding-block:.25rem}
+.nav a:hover{color:var(--ink)}
+.tools{display:flex;align-items:center;gap:.6rem}
+.seg{display:flex;border:1px solid var(--line);border-radius:999px;padding:2px}
+.seg button{font-family:var(--mono);font-size:var(--t-label);font-weight:500;padding:.38rem .7rem;border-radius:999px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.theme{width:2rem;height:2rem;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}
+.theme span{width:.85rem;height:.85rem;border-radius:50%;border:1.5px solid var(--ink);background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
+@media (max-width:760px){
+  .nav{order:3;width:100%;overflow-x:auto;gap:1.2rem;padding-bottom:.15rem}
+  .nav a{white-space:nowrap}
+}
+
+/* ---------- Hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(2.5rem,6vw,4.5rem)}
+.hero-kicker{color:var(--ink-2);margin-bottom:1.4rem}
+.hero h1{font-family:var(--display);font-size:var(--t-hero);font-weight:700;line-height:.98;letter-spacing:-.035em;text-wrap:balance}
+.measure{position:relative;display:inline-block;white-space:nowrap}
+.measure::after{content:"";position:absolute;left:0;right:0;bottom:-.02em;height:.14em;border-inline:2px solid var(--redline);background:linear-gradient(var(--redline),var(--redline)) center/100% 2px no-repeat}
+.hero-lede{max-width:34rem;margin-top:1.6rem;font-size:1.15rem;color:var(--ink-2)}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-top:2rem}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);font-weight:600;font-size:var(--t-small);padding:.85rem 1.4rem;border-radius:999px;text-decoration:none}
+.btn:hover{background:var(--redline);color:var(--on-accent)}
+.link{font-weight:600;font-size:var(--t-small);text-decoration:underline;text-decoration-color:var(--redline);text-decoration-thickness:2px;text-underline-offset:.3em}
+
+.stage{position:relative;display:grid;place-items:center;padding-block:1rem}
+.stage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--line) 1px,transparent 1.5px);background-size:16px 16px;-webkit-mask-image:radial-gradient(closest-side,#000 55%,transparent);mask-image:radial-gradient(closest-side,#000 55%,transparent)}
+.spec{--pw:clamp(230px,62vw,280px);--gt:2.1rem;--gr:2.3rem;position:relative;z-index:1;padding-top:var(--gt);padding-right:var(--gr)}
+.dim{position:absolute;color:var(--redline);font-family:var(--mono);font-size:.62rem;display:flex;align-items:center;justify-content:center}
+.dim b{position:relative;font-weight:500;background:var(--paper);white-space:nowrap}
+.dim::before{content:"";position:absolute;background:var(--redline)}
+.dim-w{top:0;left:0;width:var(--pw);height:1.1rem;border-inline:1px solid var(--redline)}
+.dim-w::before{left:0;right:0;top:50%;height:1px}
+.dim-w b{padding:0 .6em}
+.dim-h{right:0;top:var(--gt);bottom:0;width:1.1rem;border-block:1px solid var(--redline)}
+.dim-h::before{top:0;bottom:0;left:50%;width:1px}
+.dim-h b{writing-mode:vertical-rl;padding:.6em 0}
+
+.phone{width:var(--pw);aspect-ratio:390/844;background:var(--bezel);border-radius:44px;padding:9px;box-shadow:0 0 0 1px var(--line),0 34px 60px -32px var(--shadow)}
+.screen{height:100%;background:var(--screen);border-radius:36px;display:flex;flex-direction:column;overflow:hidden}
+.statusbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:11px 20px 6px;font-size:.72rem;font-weight:600;font-variant-numeric:tabular-nums}
+.island{width:72px;height:21px;border-radius:12px;background:var(--bezel)}
+.sys{display:flex;justify-content:flex-end;align-items:flex-end;gap:5px}
+.bars{display:flex;align-items:flex-end;gap:1.5px}
+.bars i{width:3px;background:var(--ink);border-radius:1px}
+.bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}.bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:10px}
+.batt{width:21px;height:10px;border:1px solid var(--ink);border-radius:3px;padding:1px}
+.batt i{display:block;width:78%;height:100%;background:var(--ink);border-radius:1px}
+.panels{flex:1;min-height:0;overflow-y:auto;padding:12px 16px 8px;font-size:.78rem;line-height:1.45}
+.p-title{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:-.02em;margin-bottom:.8rem}
+.avatar{width:54px;height:54px;border-radius:50%;background:var(--redline);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.1rem}
+.p-name{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;margin-top:.7rem;line-height:1.2}
+.p-role{color:var(--ink-2)}
+.open{display:inline-flex;align-items:center;gap:.45em;margin-top:.7rem;padding:.3em .7em;border:1px solid var(--line);border-radius:999px;font-size:.7rem;font-weight:600}
+.open::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--blue)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:.9rem}
+.kpis div{background:var(--paper);border-radius:10px;padding:.55rem .5rem}
+.kpis dd{font-family:var(--display);font-weight:700;font-size:1rem;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpis dt{font-size:.62rem;color:var(--ink-2);line-height:1.25;margin-top:.2rem}
+.now{margin-top:.9rem;padding-top:.7rem;border-top:1px solid var(--line)}
+.now span{display:block;color:var(--ink-2);font-size:.66rem}
+.rows li{display:flex;align-items:center;gap:.6rem;padding-block:.55rem;border-bottom:1px solid var(--line)}
+.rows li:last-child{border-bottom:0}
+.rows .ico{width:30px;height:30px;border-radius:9px;font-size:.85rem;flex:none}
+.rows div{min-width:0;flex:1}
+.rows strong{display:block;font-weight:600}
+.rows small{color:var(--ink-2);font-size:.66rem}
+.rows code{font-family:var(--mono);font-size:.58rem;color:var(--ink-2)}
+.kv li{padding-block:.55rem;border-bottom:1px solid var(--line)}
+.kv span{display:block;color:var(--ink-2);font-size:.66rem}
+.kv b{font-weight:600;overflow-wrap:anywhere}
+.tabbar{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding:5px 8px 2px}
+.tabbar button{font-size:.66rem;font-weight:600;color:var(--ink-2);padding:.45rem 0 .35rem;border-radius:8px;display:grid;justify-items:center;gap:4px}
+.tabbar button::before{content:"";width:16px;height:3px;border-radius:2px;background:transparent}
+.tabbar button[aria-selected="true"]{color:var(--ink)}
+.tabbar button[aria-selected="true"]::before{background:var(--redline)}
+.homebar{width:92px;height:4px;border-radius:2px;background:var(--ink);margin:4px auto 7px}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+}
+
+/* ---------- Bagian (lajur label + isi) ---------- */
+.band{display:grid;grid-template-columns:10.5rem minmax(0,1fr);gap:1.5rem 2rem;padding-block:clamp(2.75rem,6vw,4.5rem);border-top:1px solid var(--line);scroll-margin-top:5.5rem}
+.rail{color:var(--ink-2);display:flex;flex-direction:column;gap:.35rem;padding-top:.7rem}
+.rail b{color:var(--redline);font-weight:600}
+.band h2{font-family:var(--display);font-size:var(--t-h2);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-wrap:balance;margin-bottom:1.75rem}
+@media (max-width:860px){
+  .band{grid-template-columns:minmax(0,1fr)}
+  .rail{flex-direction:row;gap:1rem;padding-top:0}
+}
+
+/* Tentang */
+.about{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:2rem 3rem;align-items:start}
+.prose{display:grid;gap:1rem;max-width:38rem}
+.sheet{border-top:2px solid var(--ink)}
+.sheet div{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:1rem;padding-block:.7rem;border-bottom:1px solid var(--line);font-size:var(--t-small)}
+.sheet dt{color:var(--ink-2);font-family:var(--mono);font-size:var(--t-label);text-transform:uppercase;letter-spacing:.04em;padding-top:.3em}
+.sheet dd{font-weight:500}
+@media (max-width:760px){.about{grid-template-columns:minmax(0,1fr)}}
+
+/* Pengalaman = catatan rilis */
+.log{display:grid}
+.rel{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:.5rem 2rem;padding-block:1.6rem;border-top:1px solid var(--line)}
+.rel:first-child{border-top:2px solid var(--ink)}
+.ver{display:block;font-family:var(--mono);font-weight:600;font-size:1rem;color:var(--redline);font-variant-numeric:tabular-nums}
+.when{display:block;font-family:var(--mono);font-size:var(--t-label);color:var(--ink-2);margin-top:.35rem;font-variant-numeric:tabular-nums}
+.rel h3{font-family:var(--display);font-size:var(--t-h3);font-weight:700;letter-spacing:-.015em;line-height:1.25}
+.rel h3 span{font-weight:500;color:var(--ink-2)}
+.rel-sum{color:var(--ink-2);margin-top:.35rem;max-width:40rem}
+.changes{display:grid;gap:.55rem;margin-top:1rem}
+.changes li{display:grid;grid-template-columns:6.2rem minmax(0,1fr);gap:.9rem;align-items:baseline;font-size:var(--t-small)}
+.tag{font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;text-align:center;padding:.3em .2em;border-radius:5px;border:1px solid var(--line);color:var(--ink-2)}
+.tag-add{background:var(--blue);border-color:var(--blue);color:var(--on-accent)}
+.tag-up{border-color:var(--redline);color:var(--redline)}
+@media (max-width:620px){
+  .rel{grid-template-columns:minmax(0,1fr)}
+  .rel-meta{display:flex;align-items:baseline;gap:1rem}
+  .when{margin-top:0}
+  .changes li{grid-template-columns:5.4rem minmax(0,1fr);gap:.7rem}
+}
+
+/* Proyek = halaman toko aplikasi */
+.apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.app{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:1.4rem;display:grid;grid-template-rows:auto 1fr auto auto;gap:1rem}
+.app-head{display:flex;align-items:center;gap:.9rem}
+.ico{width:58px;height:58px;flex:none;border-radius:27%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.6rem;line-height:1}
+.i1{background:var(--redline);color:var(--on-accent)}
+.i2{background:var(--blue);color:var(--on-accent)}
+.i3{background:var(--ink);color:var(--paper)}
+.i4{background:var(--paper);color:var(--ink);border:2px solid var(--ink)}
+.app h3{font-family:var(--display);font-size:1.3rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.app-cat{font-size:var(--t-small);color:var(--ink-2)}
+.app-desc{font-size:var(--t-small);color:var(--ink-2)}
+.app-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line)}
+.app-stats div{padding:.7rem .6rem;border-left:1px solid var(--line)}
+.app-stats div:first-child{border-left:0;padding-left:0}
+.app-stats dd{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;line-height:1.15;font-variant-numeric:tabular-nums}
+.app-stats dt{font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:.25rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chips li{font-family:var(--mono);font-size:.62rem;padding:.3em .7em;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
+@media (max-width:760px){.apps{grid-template-columns:minmax(0,1fr)}}
+
+/* Tulisan */
+.posts{border-top:2px solid var(--ink)}
+.posts a{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:.4rem 2rem;align-items:baseline;padding-block:1.3rem;border-bottom:1px solid var(--line);text-decoration:none}
+.posts time,.posts .read{font-family:var(--mono);font-size:var(--t-label);color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.posts h3{font-family:var(--display);font-size:1.35rem;font-weight:700;letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
+.posts p{font-size:var(--t-small);color:var(--ink-2);margin-top:.3rem;max-width:38rem}
+.posts a:hover h3{text-decoration:underline;text-decoration-color:var(--redline);text-decoration-thickness:2px;text-underline-offset:.2em}
+@media (max-width:620px){.posts a{grid-template-columns:minmax(0,1fr)}}
+
+/* Kontak */
+.contact h2{font-size:clamp(2rem,5.5vw,3.6rem);margin-bottom:1.25rem}
+.contact-lede{color:var(--ink-2);max-width:34rem}
+.mail{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:1.75rem}
+.mail-addr{font-family:var(--mono);font-size:clamp(.95rem,2.6vw,1.25rem);font-weight:500;user-select:all;overflow-wrap:anywhere;min-width:0}
+.copy{font-size:var(--t-small);font-weight:600;border:1px solid var(--ink);border-radius:999px;padding:.55rem 1.1rem}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.socials{display:flex;flex-wrap:wrap;gap:.6rem 1.75rem;margin-top:1.5rem;font-size:var(--t-small)}
+
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem;padding-block:1.5rem 2.5rem;border-top:1px solid var(--line);color:var(--ink-2);text-transform:none}
+
+/* ---------- Tampilan baca tulisan ---------- */
+.reader{max-width:42rem;margin-inline:auto;padding-block:clamp(2rem,5vw,3.5rem) 4rem}
+.back{display:inline-block;margin-bottom:2.5rem}
+.post-meta{color:var(--redline)}
+.post h1{font-family:var(--display);font-size:clamp(2rem,5vw,3.1rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-wrap:balance;margin-block:.9rem 2rem}
+.post-body{display:grid;gap:1.25rem;font-size:1.125rem;line-height:1.7}
+
+@media (prefers-reduced-motion:no-preference){
+  .btn,.copy,.seg button,.nav a{transition:background-color .15s,color .15s}
+  .dim-w{animation:growx .7s cubic-bezier(.2,.7,.2,1) both;transform-origin:left}
+  .dim-h{animation:growy .7s .12s cubic-bezier(.2,.7,.2,1) both;transform-origin:top}
+  @keyframes growx{from{transform:scaleX(.2)}to{transform:none}}
+  @keyframes growy{from{transform:scaleY(.2)}to{transform:none}}
+}
+
+/* ---------- Tambahan untuk isi dari CV ---------- */
+.rel .chips{margin-top:1rem}
+.p-place{color:var(--ink-2);font-size:.7rem;margin-top:.15rem}
+.rows time{font-family:var(--mono);font-size:.58rem;color:var(--ink-2)}
+.feats{display:grid;gap:.45rem;font-size:var(--t-small)}
+.feats li{display:grid;grid-template-columns:.9rem minmax(0,1fr);gap:.5rem;align-items:baseline}
+.feats li::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:var(--redline);transform:translateY(-.1em)}
+.app-feat{grid-template-rows:auto auto 1fr auto auto}
+.store{justify-self:start;font-size:var(--t-small);font-weight:600;border:1px solid var(--ink);border-radius:999px;padding:.5rem 1.1rem;text-decoration:none}
+.store:hover{background:var(--ink);color:var(--paper)}
+.apps-min{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:1.25rem}
+.apps-min .app{grid-template-rows:auto 1fr auto;padding:1.2rem}
+.apps-min .ico{width:46px;height:46px;font-size:1.25rem}
+.apps-min .app h3{font-size:1.1rem}
+@media (max-width:980px){.apps-min{grid-template-columns:minmax(0,1fr)}}
+.more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 3rem}
+.more h3{font-family:var(--mono);font-size:var(--t-label);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);padding-bottom:.7rem;border-bottom:2px solid var(--ink)}
+.list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.2rem 1.25rem;align-items:baseline;padding-block:.7rem;border-bottom:1px solid var(--line);font-size:var(--t-small)}
+.list b{font-weight:600}
+.list small{display:block;color:var(--ink-2);font-size:.85rem;margin-top:.15rem}
+.list time,.list .yr{font-family:var(--mono);font-size:var(--t-label);color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.more .wide{grid-column:1 / -1}
+.certs{columns:2;column-gap:3rem}
+.certs li{break-inside:avoid}
+@media (max-width:760px){.more{grid-template-columns:minmax(0,1fr)}.certs{columns:1}}
+.draft-note{font-size:var(--t-small);color:var(--ink-2);border:1px dashed var(--line);border-radius:12px;padding:.8rem 1rem;margin-bottom:1.5rem;max-width:44rem}
+.draft-note b{color:var(--redline)}
+.posts .draft{font-family:var(--mono);font-size:var(--t-label);color:var(--redline);text-transform:uppercase;letter-spacing:.04em}
+
+a.mail-addr{text-decoration:none}
+a.mail-addr:hover{text-decoration:underline;text-decoration-color:var(--redline);text-underline-offset:.3em}
+</style>
+</head>
+<body>
+<div class="site" id="site" data-lang="id">
+<div class="wrap">
+
+  <header class="top">
+    <div class="top-row wrap">
+      <a class="brand" href="#beranda">ilham<i>.</i>maulana</a>
+      <nav class="nav" aria-label="Navigasi utama">
+        <a href="#tentang"><span lang="id">Tentang</span><span lang="en">About</span></a>
+        <a href="#pengalaman"><span lang="id">Pengalaman</span><span lang="en">Experience</span></a>
+        <a href="#proyek"><span lang="id">Proyek</span><span lang="en">Projects</span></a>
+        <a href="#sertifikat"><span lang="id">Sertifikat</span><span lang="en">Certificates</span></a>
+        <a href="#tulisan"><span lang="id">Tulisan</span><span lang="en">Writing</span></a>
+        <a href="#kontak"><span lang="id">Kontak</span><span lang="en">Contact</span></a>
+      </nav>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="Bahasa / Language">
+          <button type="button" id="lang-id" data-set-lang="id" aria-pressed="true">ID</button>
+          <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+        </div>
+        <button type="button" class="theme" id="theme-toggle" aria-label="Ganti tema terang/gelap"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HALAMAN UTAMA ================= -->
+  <main id="home">
+
+    <section class="hero" id="beranda">
+      <div>
+        <p class="mono hero-kicker">Ilham Maulana · Android Developer · Bekasi</p>
+        <h1>
+          <span lang="id">Aplikasi Android yang berangkat dari <span class="measure">pengguna</span>.</span>
+          <span lang="en">Android apps that start from the <span class="measure">user</span>.</span>
+        </h1>
+        <p class="hero-lede" lang="id">Android Developer dengan 4 tahun pengalaman di rekayasa perangkat lunak dan desain UI/UX. Saya menulis Kotlin dengan XML, Jetpack Compose, dan KMP. Saat ini Mobile Developer di PT BRI Insurance.</p>
+        <p class="hero-lede" lang="en">Android Developer with 4 years of experience in software engineering and UI/UX design. I write Kotlin with XML, Jetpack Compose and KMP. Currently Mobile Developer at PT BRI Insurance.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#proyek"><span lang="id">Lihat proyek</span><span lang="en">See projects</span></a>
+          <a class="link" href="#pengalaman"><span lang="id">Riwayat kerja</span><span lang="en">Work history</span></a>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="spec">
+          <div class="dim dim-w" aria-hidden="true"><b>390 pt</b></div>
+          <div class="dim dim-h" aria-hidden="true"><b>844 pt</b></div>
+          <div class="phone">
+            <div class="screen">
+              <div class="statusbar" aria-hidden="true">
+                <span>9:41</span><span class="island"></span>
+                <span class="sys"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="batt"><i></i></span></span>
+              </div>
+
+              <div class="panels">
+                <div id="panel-profil" role="tabpanel" aria-labelledby="tab-profil">
+                  <div class="avatar" aria-hidden="true">IM</div>
+                  <p class="p-name">Ilham Maulana</p>
+                  <p class="p-role">Mobile Developer · BRI Insurance</p>
+                  <p class="p-place">Bekasi, Indonesia</p>
+                  <dl class="kpis">
+                    <div><dd><span lang="id">4 thn</span><span lang="en">4 yrs</span></dd><dt><span lang="id">pengalaman</span><span lang="en">experience</span></dt></div>
+                    <div><dd>2</dd><dt><span lang="id">aplikasi di Play Store</span><span lang="en">apps on Play Store</span></dt></div>
+                    <div><dd>Top 10</dd><dt><span lang="id">capstone Bangkit</span><span lang="en">Bangkit capstone</span></dt></div>
+                  </dl>
+                  <p class="now"><span lang="id">Sedang dikerjakan</span><span lang="en">Working on</span><b>SIHC Mobile</b></p>
+                </div>
+
+                <div id="panel-rilis" role="tabpanel" aria-labelledby="tab-rilis" hidden>
+                  <p class="p-title"><span lang="id">Proyek</span><span lang="en">Projects</span></p>
+                  <ul class="rows">
+                    <li><span class="ico i1">M</span><div><strong>MEVER</strong><small>Play Store</small></div><time>2026</time></li>
+                    <li><span class="ico i4">F</span><div><strong>Flix Movie App</strong><small>Compose · Ktor</small></div><time>2024</time></li>
+                    <li><span class="ico i3">N</span><div><strong>News App</strong><small>Compose · Retrofit</small></div><time>2024</time></li>
+                    <li><span class="ico i2">E</span><div><strong>Eventhings</strong><small>Play Store</small></div><time>2023</time></li>
+                  </ul>
+                </div>
+
+                <div id="panel-kontak" role="tabpanel" aria-labelledby="tab-kontak" hidden>
+                  <p class="p-title"><span lang="id">Hubungi saya</span><span lang="en">Get in touch</span></p>
+                  <ul class="kv">
+                    <li><span>Email</span><b>ilhamjkt14@gmail.com</b></li>
+                    <li><span>LinkedIn</span><b>linkedin.com/in/ilhmaulnaa</b></li>
+                    <li><span>GitHub</span><b>github.com/Ilhamaulnaa</b></li>
+                    <li><span><span lang="id">Zona waktu</span><span lang="en">Time zone</span></span><b>WIB (UTC+7)</b></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="tabbar" role="tablist" aria-label="Layar profil">
+                <button type="button" role="tab" id="tab-profil" aria-controls="panel-profil" aria-selected="true"><span><span lang="id">Profil</span><span lang="en">Profile</span></span></button>
+                <button type="button" role="tab" id="tab-rilis" aria-controls="panel-rilis" aria-selected="false" tabindex="-1"><span><span lang="id">Proyek</span><span lang="en">Projects</span></span></button>
+                <button type="button" role="tab" id="tab-kontak" aria-controls="panel-kontak" aria-selected="false" tabindex="-1"><span><span lang="id">Kontak</span><span lang="en">Contact</span></span></button>
+              </div>
+              <div class="homebar" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Tentang ---------- -->
+    <section class="band" id="tentang">
+      <div class="rail mono"><b><span lang="id">Tentang</span><span lang="en">About</span></b></div>
+      <div>
+        <h2><span lang="id">Android Developer dari Bekasi dengan latar rekayasa perangkat lunak.</span><span lang="en">An Android developer from Bekasi with a software engineering background.</span></h2>
+        <div class="about">
+          <div class="prose">
+            <p lang="id">Saya Android Developer dengan 4 tahun pengalaman di rekayasa perangkat lunak dan desain UI/UX. Fokus saya pengembangan aplikasi mobile dengan Kotlin, baik dengan XML, Jetpack Compose, maupun Kotlin Multiplatform.</p>
+            <p lang="id">Selama kuliah Ilmu Komputer di Universitas Bhayangkara saya aktif di organisasi dan kompetisi inovasi produk digital. Dari situ saya terbiasa bekerja dalam tim, memimpin, dan memulai ide baru.</p>
+            <p lang="id">Minat utama saya membuat produk digital yang berangkat dari kebutuhan pengguna.</p>
+            <p lang="en">I am an Android Developer with 4 years of experience in software engineering and UI/UX design. My focus is mobile app development in Kotlin, with XML, Jetpack Compose and Kotlin Multiplatform.</p>
+            <p lang="en">While studying Computer Science at Bhayangkara University I was active in student organisations and digital product innovation competitions. That is where I learned to work in a team, to lead, and to start new ideas.</p>
+            <p lang="en">My main interest is building digital products that start from what users need.</p>
+          </div>
+          <dl class="sheet">
+            <div><dt><span lang="id">Lokasi</span><span lang="en">Based in</span></dt><dd>Bekasi, Indonesia</dd></div>
+            <div><dt><span lang="id">Bahasa</span><span lang="en">Languages</span></dt><dd>Kotlin (XML, Jetpack Compose, KMP), Java</dd></div>
+            <div><dt><span lang="id">Arsitektur</span><span lang="en">Architecture</span></dt><dd><span lang="id">MVVM, Clean Architecture, modularisasi, SOLID</span><span lang="en">MVVM, Clean Architecture, modularisation, SOLID</span></dd></div>
+            <div><dt><span lang="id">Pustaka</span><span lang="en">Libraries</span></dt><dd>Retrofit, Room, Paging 3, WorkManager, DataStore, Hilt, Koin, Firebase, WebSocket</dd></div>
+            <div><dt><span lang="id">Pengujian</span><span lang="en">Testing</span></dt><dd>JUnit, Mockito, Espresso</dd></div>
+            <div><dt><span lang="id">Cara kerja</span><span lang="en">Process</span></dt><dd>Git, GitHub, Agile, Scrum</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Pengalaman ---------- -->
+    <section class="band" id="pengalaman">
+      <div class="rail mono"><b><span lang="id">Pengalaman</span><span lang="en">Experience</span></b><span><span lang="id">Catatan rilis karier</span><span lang="en">Career changelog</span></span></div>
+      <div>
+        <h2><span lang="id">Riwayat kerja, ditulis seperti catatan rilis.</span><span lang="en">Work history, written as release notes.</span></h2>
+        <div class="log">
+
+          <article class="rel">
+            <div class="rel-meta"><span class="ver">v2.0</span><span class="when"><span lang="id">Nov 2025 – kini</span><span lang="en">Nov 2025 – now</span></span></div>
+            <div>
+              <h3>Mobile Developer <span>· PT BRI Insurance</span></h3>
+              <p class="rel-sum" lang="id">Membangun fitur budaya kerja di SIHC Mobile, aplikasi internal yang bisa diakses seluruh karyawan.</p>
+              <p class="rel-sum" lang="en">Building workplace culture features in SIHC Mobile, an internal app available to all employees.</p>
+              <ul class="changes">
+                <li><span class="tag tag-add"><span lang="id">Baru</span><span lang="en">Added</span></span><span><span lang="id"><b>Culture Care Forum.</b> Ruang diskusi karyawan tentang budaya kerja dan transformasi perusahaan. Karyawan bisa mengunggah konten dan berkomentar di ruang yang dikelola CTR Desk.</span><span lang="en"><b>Culture Care Forum.</b> A discussion space for employees on workplace culture and corporate transformation. Employees post and comment in rooms managed by the CTR Desk.</span></span></li>
+                <li><span class="tag tag-add"><span lang="id">Baru</span><span lang="en">Added</span></span><span><span lang="id"><b>BRINSPIRATION Submission.</b> Modul pengajuan ide dan inovasi, perorangan atau tim, lengkap dengan lampiran. Admin CTR Desk meninjau, memverifikasi, dan mengunduh berkasnya.</span><span lang="en"><b>BRINSPIRATION Submission.</b> A module for submitting ideas and innovations, individually or as a team, with attachments. CTR Desk admins review, verify and download the files.</span></span></li>
+                <li><span class="tag tag-add"><span lang="id">Baru</span><span lang="en">Added</span></span><span><span lang="id"><b>Culture Repository.</b> Pusat materi budaya perusahaan dalam empat kategori: Culture News, Culture Handbook, Digital Culture Kit, dan Culture Talk.</span><span lang="en"><b>Culture Repository.</b> A central hub for company culture material in four categories: Culture News, Culture Handbook, Digital Culture Kit and Culture Talk.</span></span></li>
+              </ul>
+              <ul class="chips"><li>Kotlin (legacy)</li><li>Material Design 3</li><li>Firebase</li><li>GSON</li><li>Navigation Component</li><li>Paging 3</li><li>Room</li><li>DataStore</li><li>Glide</li><li>MVVM</li></ul>
+            </div>
+          </article>
+
+          <article class="rel">
+            <div class="rel-meta"><span class="ver">v1.1</span><span class="when">Feb 2024 – Jun 2024</span></div>
+            <div>
+              <h3>STECHOQ Academy Batch 6, Mobile Development <span>· PT Stechoq Robotika Indonesia</span></h3>
+              <ul class="changes">
+                <li><span class="tag"><span lang="id">Peran</span><span lang="en">Role</span></span><span><span lang="id">Project Manager tim.</span><span lang="en">Project Manager of the team.</span></span></li>
+                <li><span class="tag"><span lang="id">Materi</span><span lang="en">Courses</span></span><span><span lang="id">Git, algoritma dan struktur data, Kotlin dan Kotlin asinkron, pengembangan Android, RESTful API untuk Android, unit testing.</span><span lang="en">Git, algorithms and data structures, Kotlin and asynchronous Kotlin, Android development, RESTful APIs for Android, unit testing.</span></span></li>
+                <li><span class="tag">Soft skill</span><span><span lang="id">Kepemimpinan, growth mindset, budaya umpan balik.</span><span lang="en">Leadership, growth mindset, feedback culture.</span></span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="rel">
+            <div class="rel-meta"><span class="ver">v1.0</span><span class="when">Sep 2023 – Jan 2025</span></div>
+            <div>
+              <h3>Android Developer <span>· PT Inovasi Acara Nusantara</span></h3>
+              <p class="rel-sum" lang="id">Memimpin pengembangan aplikasi Android Eventhings, platform yang menghubungkan penyelenggara acara dengan vendor.</p>
+              <p class="rel-sum" lang="en">Led development of the Eventhings Android app, a platform that connects event organisers with vendors.</p>
+              <ul class="changes">
+                <li><span class="tag tag-add"><span lang="id">Baru</span><span lang="en">Added</span></span><span><span lang="id">Login dan registrasi, beranda, halaman media partner, sponsor, dan penyewaan, daftar pembelian, checkout, dan detail pembayaran.</span><span lang="en">Login and registration, home, media partner, sponsorship and rentals pages, purchases list, checkout and payment details.</span></span></li>
+                <li><span class="tag tag-add"><span lang="id">Baru</span><span lang="en">Added</span></span><span><span lang="id">Antarmuka modern dan responsif dengan Jetpack Compose.</span><span lang="en">Modern, responsive UI built with Jetpack Compose.</span></span></li>
+                <li><span class="tag tag-up"><span lang="id">Naik</span><span lang="en">Improved</span></span><span><span lang="id">Arsitektur multi-modul agar kode lebih rapi, mudah dirawat, dan mudah dikerjakan bersama.</span><span lang="en">Multi-module architecture for cleaner, more maintainable code that is easier to work on together.</span></span></li>
+                <li><span class="tag tag-up"><span lang="id">Naik</span><span lang="en">Improved</span></span><span><span lang="id">Praktik terbaik Android untuk performa dan keamanan.</span><span lang="en">Android best practices for performance and security.</span></span></li>
+                <li><span class="tag"><span lang="id">Tim</span><span lang="en">Team</span></span><span><span lang="id">Code review rutin dan kerja lintas fungsi dengan tim produk dan bisnis.</span><span lang="en">Regular code reviews and cross-functional work with product and business teams.</span></span></li>
+              </ul>
+              <ul class="chips"><li>Kotlin</li><li>Jetpack Compose</li><li>Material Design 3</li><li>Firebase</li><li>Retrofit</li><li>Paging 3</li><li>Koin</li><li>Room</li><li>Coil</li><li>MVVM</li></ul>
+            </div>
+          </article>
+
+          <article class="rel">
+            <div class="rel-meta"><span class="ver">v0.9</span><span class="when"><span lang="id">Agu 2023 – Jan 2024</span><span lang="en">Aug 2023 – Jan 2024</span></span></div>
+            <div>
+              <h3>Bangkit 2023 Batch 2, Mobile Development <span>· Bangkit Academy (Google, Tokopedia, Gojek, Traveloka)</span></h3>
+              <ul class="changes">
+                <li><span class="tag tag-up"><span lang="id">Capaian</span><span lang="en">Result</span></span><span><span lang="id">Proyek capstone bersama tim, masuk Top 10 Teams Bangkit Capstone Project.</span><span lang="en">Team capstone project, placed in the Top 10 Teams of the Bangkit Capstone Project.</span></span></li>
+                <li><span class="tag"><span lang="id">Materi</span><span lang="en">Courses</span></span><span><span lang="id">Kotlin, Android fundamental dan intermediate, Jetpack Compose, prinsip SOLID.</span><span lang="en">Kotlin, fundamental and intermediate Android, Jetpack Compose, SOLID principles.</span></span></li>
+                <li><span class="tag">Soft skill</span><span><span lang="id">English for Business Communication dari The British Institute.</span><span lang="en">English for Business Communication from The British Institute.</span></span></li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="rel">
+            <div class="rel-meta"><span class="ver">v0.1</span><span class="when">Sep 2021 – Jul 2025</span></div>
+            <div>
+              <h3><span lang="id">S1 Ilmu Komputer</span><span lang="en">Bachelor of Computer Science</span> <span>· <span lang="id">Universitas Bhayangkara</span><span lang="en">Bhayangkara University</span></span></h3>
+              <p class="rel-sum" lang="id">Initial commit. IPK 3,67 dari 4,00. Mentor di Google Developer Student Club.</p>
+              <p class="rel-sum" lang="en">Initial commit. GPA 3.67 out of 4.00. Mentor at the Google Developer Student Club.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Proyek ---------- -->
+    <section class="band" id="proyek">
+      <div class="rail mono"><b><span lang="id">Proyek</span><span lang="en">Projects</span></b><span><span lang="id">5 aplikasi</span><span lang="en">5 apps</span></span></div>
+      <div>
+        <h2><span lang="id">Aplikasi yang saya bangun.</span><span lang="en">Apps I have built.</span></h2>
+
+        <div class="apps">
+          <article class="app app-feat">
+            <div class="app-head"><span class="ico i1" aria-hidden="true">M</span><div><h3>MEVER</h3><p class="app-cat"><span lang="id">Utilitas · Android · 2026</span><span lang="en">Utilities · Android · 2026</span></p></div></div>
+            <p class="app-desc" lang="id">Platform alat serba guna untuk Android. Unduh video dan foto favorit, lihat langsung di dalam aplikasi, dan buat gambar dengan AI.</p>
+            <p class="app-desc" lang="en">An all-in-one tool platform for Android. Download your favourite videos and photos, view them inside the app, and generate images with AI.</p>
+            <ul class="feats">
+              <li><span><span lang="id">Unduh konten dari media sosial</span><span lang="en">Download content from social media</span></span></li>
+              <li><span><span lang="id">Unduhan tetap berjalan saat aplikasi diminimalkan</span><span lang="en">Downloads keep going when the app is minimised</span></span></li>
+              <li><span><span lang="id">Jeda, lanjutkan, dan batalkan kapan saja</span><span lang="en">Pause, resume and cancel at any time</span></span></li>
+              <li><span><span lang="id">Sederhana dan nyaman dipakai di malam hari</span><span lang="en">Simple, and comfortable for night use</span></span></li>
+            </ul>
+            <ul class="chips"><li>Jetpack Compose</li><li>Hilt</li><li>Retrofit</li><li>Kotlin Flow</li><li>Ketch</li><li>MVVM</li><li>Modular</li><li>DataStore</li></ul>
+            <a class="store" href="https://s.id/MEVER" target="_blank" rel="noopener"><span lang="id">Buka di Play Store</span><span lang="en">Open on Play Store</span></a>
+          </article>
+
+          <article class="app app-feat">
+            <div class="app-head"><span class="ico i2" aria-hidden="true">E</span><div><h3>Eventhings</h3><p class="app-cat"><span lang="id">Acara · Android · 2023</span><span lang="en">Events · Android · 2023</span></p></div></div>
+            <p class="app-desc" lang="id">Platform perencanaan acara untuk mencari vendor terbaik, membandingkan harga, dan mengelola acara di satu tempat. Menjembatani penyelenggara acara dan vendor.</p>
+            <p class="app-desc" lang="en">An event planning platform for finding the best vendors, comparing prices and managing an event in one place. It bridges event organisers and vendors.</p>
+            <ul class="feats">
+              <li><span><span lang="id">Beranda dan autentikasi</span><span lang="en">Home and authentication</span></span></li>
+              <li><span><span lang="id">Media partner, sponsor, dan penyewaan (daftar dan detail)</span><span lang="en">Media partners, sponsors and rentals (list and detail)</span></span></li>
+              <li><span><span lang="id">Daftar pembelian, checkout, dan detail pembayaran</span><span lang="en">Purchases list, checkout and payment details</span></span></li>
+              <li><span><span lang="id">Prototipe antarmuka dan komponen UI kustom</span><span lang="en">Interface prototype and custom UI components</span></span></li>
+            </ul>
+            <ul class="chips"><li>Kotlin</li><li>Jetpack Compose</li><li>Clean Architecture</li><li>MVVM</li><li>Retrofit</li><li>Koin</li><li>Room</li><li>Paging 3</li><li>Firebase</li><li>Figma</li></ul>
+            <a class="store" href="https://s.id/EventhingsApp" target="_blank" rel="noopener"><span lang="id">Buka di Play Store</span><span lang="en">Open on Play Store</span></a>
+          </article>
+        </div>
+
+        <div class="apps apps-min">
+          <article class="app">
+            <div class="app-head"><span class="ico i3" aria-hidden="true">S</span><div><h3>Story App</h3><p class="app-cat"><span lang="id">Sosial · 2023</span><span lang="en">Social · 2023</span></p></div></div>
+            <p class="app-desc"><span lang="id">Media sosial sederhana. Daftar akun, unggah cerita dari galeri atau kamera, lihat cerita pengguna lain, dan tampilkan lokasinya di peta.</span><span lang="en">A simple social app. Register, upload stories from the gallery or camera, browse other users' stories and see their location on a map.</span></p>
+            <ul class="chips"><li>Jetpack Compose</li><li>CameraX</li><li>Room</li><li>Paging 3</li><li>Retrofit</li><li>MVVM</li></ul>
+          </article>
+          <article class="app">
+            <div class="app-head"><span class="ico i4" aria-hidden="true">N</span><div><h3>News App</h3><p class="app-cat"><span lang="id">Berita · 2024</span><span lang="en">News · 2024</span></p></div></div>
+            <p class="app-desc"><span lang="id">Aplikasi untuk mencari berita utama.</span><span lang="en">An app for finding headline news.</span></p>
+            <ul class="chips"><li>Jetpack Compose</li><li>Retrofit</li><li>Koin</li><li>WorkManager</li><li>DataStore</li><li>MVVM</li></ul>
+          </article>
+          <article class="app">
+            <div class="app-head"><span class="ico i3" aria-hidden="true">F</span><div><h3>Flix Movie App</h3><p class="app-cat"><span lang="id">Film · 2024</span><span lang="en">Movies · 2024</span></p></div></div>
+            <p class="app-desc"><span lang="id">Aplikasi untuk mencari film.</span><span lang="en">An app for finding movies.</span></p>
+            <ul class="chips"><li>Jetpack Compose</li><li>Compose Animation</li><li>Hilt</li><li>Ktor</li><li>Retrofit</li><li>MVVM</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Pelatihan, organisasi, sertifikat ---------- -->
+    <section class="band" id="sertifikat">
+      <div class="rail mono"><b><span lang="id">Sertifikat</span><span lang="en">Certificates</span></b><span><span lang="id">Pelatihan &amp; organisasi</span><span lang="en">Training &amp; community</span></span></div>
+      <div>
+        <h2><span lang="id">Pelatihan, organisasi, dan sertifikat.</span><span lang="en">Training, community and certificates.</span></h2>
+        <div class="more">
+          <div>
+            <h3><span lang="id">Pelatihan</span><span lang="en">Training</span></h3>
+            <ul class="list">
+              <li><span><b><span lang="id">Pelatihan Pemrograman Kotlin Intermediate</span><span lang="en">Intermediate Kotlin Programming Training</span></b><small>ID Networkers Indonesia. <span lang="id">AndroidX, design pattern, Android Jetpack, dependency injection. Proyek: News App, Movie App, Notes App.</span><span lang="en">AndroidX, design patterns, Android Jetpack, dependency injection. Projects: News App, Movie App, Notes App.</span></small></span><span class="yr"><span lang="id">Jun 2025</span><span lang="en">Jun 2025</span></span></li>
+              <li><span><b>Bootcamp Android Development</b><small>Startup Android Jakarta. <span lang="id">Jetpack Compose, Google Maps API, networking, state management, navigasi. Proyek: Gojek App.</span><span lang="en">Jetpack Compose, Google Maps API, networking, state management, navigation. Project: Gojek App.</span></small></span><span class="yr"><span lang="id">Des 2022 – Jun 2023</span><span lang="en">Dec 2022 – Jun 2023</span></span></li>
+            </ul>
+          </div>
+          <div>
+            <h3><span lang="id">Organisasi</span><span lang="en">Community</span></h3>
+            <ul class="list">
+              <li><span><b>Google Developer Student Club (GDSC)</b><small><span lang="id">Android Developer. Fasilitator komunikasi dan pemecahan masalah. Menyelenggarakan kunjungan industri satu bulan untuk 30 peserta.</span><span lang="en">Android Developer. Communication and problem-solving facilitator. Organised a one-month industrial visit for 30 participants.</span></small></span><span class="yr"><span lang="id">Jul 2024 – 2025</span><span lang="en">Jul 2024 – 2025</span></span></li>
+              <li><span><b><span lang="id">Panitia Software Engineering Event</span><span lang="en">Software Engineering Event Committee</span></b><small><span lang="id">Staf acara. Menyusun konsep dan rundown untuk 6 acara bulanan, dari seminar nasional sampai kompetisi nasional.</span><span lang="en">Event staff. Planned the concept and rundown for 6 monthly events, from national seminars to national competitions.</span></small></span><span class="yr"><span lang="id">Agu – Des 2022</span><span lang="en">Aug – Dec 2022</span></span></li>
+            </ul>
+          </div>
+          <div class="wide">
+            <h3><span lang="id">Sertifikat</span><span lang="en">Certificates</span></h3>
+            <ul class="list certs">
+              <li><b>Android Jetpack Compose: The Comprehensive Bootcamp</b><span class="yr">Udemy · 2025</span></li>
+              <li><b>Top 10 Teams, Bangkit Capstone Project</b><span class="yr">Bangkit · 2024</span></li>
+              <li><b>English for Business Communication</b><span class="yr">The British Institute · 2024</span></li>
+              <li><b>Junior Web Developer</b><span class="yr">VSGA · 2024</span></li>
+              <li><b>Learn to Build Android Apps with Jetpack Compose</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Learn Intermediate Android App</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Learn Fundamental Android App</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Learn Android App for Beginner</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Learn SOLID Programming Principles</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Getting Started Programming with Kotlin</b><span class="yr">Dicoding · 2023</span></li>
+              <li><b>Kotlin Multiplatform for Android</b><span class="yr">Dicoding · 2022</span></li>
+              <li><b>Develop Skills to Become an Android Developer</b><span class="yr">Binar Insight · 2022</span></li>
+              <li><b>Android Application Creation Training</b><span class="yr">Dunia Dicoding · 2022</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Tulisan ---------- -->
+    <section class="band" id="tulisan">
+      <div class="rail mono"><b><span lang="id">Tulisan</span><span lang="en">Writing</span></b><span>Blog</span></div>
+      <div>
+        <h2><span lang="id">Catatan dari proyek dan proses belajar.</span><span lang="en">Notes from projects and learning.</span></h2>
+        <!-- HAPUS catatan ini setelah tulisan diganti dengan tulisan Anda sendiri -->
+        <p class="draft-note">
+          <span lang="id"><b>Draf.</b> Tiga tulisan di bawah disusun dari isi CV sebagai contoh. Periksa isinya, lalu ganti dengan tulisan Anda sendiri.</span>
+          <span lang="en"><b>Drafts.</b> The three posts below were drafted from the CV as examples. Review them, then replace them with your own writing.</span>
+        </p>
+        <div class="posts">
+          <a href="#baca-multi-modul" data-post="multi-modul">
+            <span class="draft"><span lang="id">Draf</span><span lang="en">Draft</span></span>
+            <div>
+              <h3><span lang="id">Kenapa Eventhings memakai arsitektur multi-modul</span><span lang="en">Why Eventhings uses a multi-module architecture</span></h3>
+              <p><span lang="id">Banyak alur dalam satu aplikasi, dan cara memisahkannya supaya tim tidak saling menunggu.</span><span lang="en">Many flows in one app, and how to separate them so the team is not waiting on each other.</span></p>
+            </div>
+            <span class="read"><span lang="id">Arsitektur</span><span lang="en">Architecture</span></span>
+          </a>
+          <a href="#baca-unduhan-latar" data-post="unduhan-latar">
+            <span class="draft"><span lang="id">Draf</span><span lang="en">Draft</span></span>
+            <div>
+              <h3><span lang="id">Unduhan yang tetap berjalan saat aplikasi diminimalkan</span><span lang="en">Downloads that keep going when the app is minimised</span></h3>
+              <p><span lang="id">Cara MEVER menjalankan unduhan di latar belakang dan menjaga tombol jeda tetap sinkron.</span><span lang="en">How MEVER runs downloads in the background and keeps the pause button in sync.</span></p>
+            </div>
+            <span class="read">Android</span>
+          </a>
+          <a href="#baca-xml-compose-kmp" data-post="xml-compose-kmp">
+            <span class="draft"><span lang="id">Draf</span><span lang="en">Draft</span></span>
+            <div>
+              <h3><span lang="id">Dari XML ke Compose, lalu KMP: catatan belajar Kotlin</span><span lang="en">From XML to Compose, then KMP: notes on learning Kotlin</span></h3>
+              <p><span lang="id">Urutan belajar yang saya lalui, dan hal yang paling membantu saat berpindah.</span><span lang="en">The order I learned things in, and what helped most when switching.</span></p>
+            </div>
+            <span class="read"><span lang="id">Belajar</span><span lang="en">Learning</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Kontak ---------- -->
+    <section class="band contact" id="kontak">
+      <div class="rail mono"><b><span lang="id">Kontak</span><span lang="en">Contact</span></b></div>
+      <div>
+        <h2><span lang="id">Punya ide aplikasi? Ceritakan ke saya.</span><span lang="en">Have an app idea? Tell me about it.</span></h2>
+        <p class="contact-lede" lang="id">Untuk peluang kerja atau kolaborasi, kirim email atau hubungi saya lewat LinkedIn.</p>
+        <p class="contact-lede" lang="en">For job opportunities or collaboration, send an email or reach me on LinkedIn.</p>
+        <div class="mail">
+          <a class="mail-addr" id="mail-addr" href="mailto:ilhamjkt14@gmail.com">ilhamjkt14@gmail.com</a>
+          <button type="button" class="copy" id="copy-mail">
+            <span class="copy-idle"><span lang="id">Salin email</span><span lang="en">Copy email</span></span>
+            <span class="copy-done" hidden><span lang="id">Tersalin</span><span lang="en">Copied</span></span>
+          </button>
+        </div>
+        <div class="socials">
+          <a class="link" href="https://www.linkedin.com/in/ilhmaulnaa" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="link" href="https://github.com/Ilhamaulnaa" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= TAMPILAN BACA ================= -->
+  <div class="reader" id="reader" hidden>
+    <a class="link back" href="#tulisan" id="back"><span lang="id">← Semua tulisan</span><span lang="en">← All posts</span></a>
+
+    <article class="post" data-post="multi-modul" hidden>
+      <p class="mono post-meta"><span lang="id">Draf · Arsitektur</span><span lang="en">Draft · Architecture</span></p>
+      <h1><span lang="id">Kenapa Eventhings memakai arsitektur multi-modul</span><span lang="en">Why Eventhings uses a multi-module architecture</span></h1>
+      <div class="post-body">
+        <p lang="id">Eventhings punya banyak alur: autentikasi, beranda, media partner, sponsor, penyewaan, sampai checkout dan pembayaran. Kalau semuanya ada di satu modul, perubahan kecil di satu alur mudah ikut menyentuh alur lain.</p>
+        <p lang="id">Karena itu aplikasinya dipecah menjadi beberapa modul. Tiap layar memakai pola MVVM, dan Koin menghubungkan dependensi antarmodul. Batas antarmodul memaksa kami memikirkan apa yang boleh diketahui sebuah fitur tentang fitur lain.</p>
+        <p lang="id">Hasilnya kode lebih rapi dan lebih mudah dirawat, dan anggota tim bisa mengerjakan fitur yang berbeda tanpa sering bentrok.</p>
+        <p lang="en">Eventhings has many flows: authentication, home, media partners, sponsors, rentals, all the way to checkout and payment. With everything in one module, a small change in one flow easily touches another.</p>
+        <p lang="en">So the app is split into several modules. Each screen follows MVVM, and Koin wires dependencies across modules. Module boundaries forced us to think about what one feature is allowed to know about another.</p>
+        <p lang="en">The result is cleaner, more maintainable code, and team members can work on different features without colliding as often.</p>
+      </div>
+    </article>
+
+    <article class="post" data-post="unduhan-latar" hidden>
+      <p class="mono post-meta"><span lang="id">Draf · Android</span><span lang="en">Draft · Android</span></p>
+      <h1><span lang="id">Unduhan yang tetap berjalan saat aplikasi diminimalkan</span><span lang="en">Downloads that keep going when the app is minimised</span></h1>
+      <div class="post-body">
+        <p lang="id">Di MEVER, pengguna mengunduh video dan foto lalu biasanya langsung berpindah ke aplikasi lain. Unduhan harus tetap berjalan, dan pengguna harus bisa menjeda, melanjutkan, atau membatalkannya kapan saja.</p>
+        <p lang="id">Android membatasi pekerjaan di latar belakang, jadi unduhan perlu dijalankan lewat mekanisme yang memang disediakan sistem. MEVER memakai pustaka Ketch untuk mengelola unduhan tersebut.</p>
+        <p lang="id">Status unduhan diamati sebagai Kotlin Flow. Dengan begitu tombol jeda, lanjutkan, dan batal di layar Compose selalu mengikuti keadaan unduhan yang sebenarnya.</p>
+        <p lang="en">In MEVER, users download videos and photos and usually switch to another app right away. The download has to keep running, and users must be able to pause, resume or cancel it at any time.</p>
+        <p lang="en">Android restricts background work, so downloads need to run through the mechanisms the system provides for it. MEVER uses the Ketch library to manage those downloads.</p>
+        <p lang="en">Download state is observed as a Kotlin Flow. That keeps the pause, resume and cancel buttons on the Compose screen in step with the real state of the download.</p>
+      </div>
+    </article>
+
+    <article class="post" data-post="xml-compose-kmp" hidden>
+      <p class="mono post-meta"><span lang="id">Draf · Belajar</span><span lang="en">Draft · Learning</span></p>
+      <h1><span lang="id">Dari XML ke Compose, lalu KMP: catatan belajar Kotlin</span><span lang="en">From XML to Compose, then KMP: notes on learning Kotlin</span></h1>
+      <div class="post-body">
+        <p lang="id">Saya belajar Android lewat beberapa jalur: kelas Dicoding, bootcamp Startup Android Jakarta, lalu Bangkit 2023. Di sana saya mengenal Kotlin, dasar Android, dan Jetpack Compose.</p>
+        <p lang="id">Sekarang keduanya saya pakai. Di pekerjaan saya merawat kode Kotlin lama, sedangkan Eventhings dan MEVER dibangun dengan Compose.</p>
+        <p lang="id">Yang paling membantu saat berpindah adalah memahami state dan arsitektur lebih dulu, baru cara menggambar antarmukanya. Pola MVVM yang sama tetap berlaku di XML maupun Compose, dan menjadi bekal untuk Kotlin Multiplatform.</p>
+        <p lang="en">I learned Android through several routes: Dicoding classes, the Startup Android Jakarta bootcamp, then Bangkit 2023. That is where I picked up Kotlin, Android fundamentals and Jetpack Compose.</p>
+        <p lang="en">Today I use both. At work I maintain older Kotlin code, while Eventhings and MEVER are built with Compose.</p>
+        <p lang="en">What helped most when switching was understanding state and architecture first, and how to draw the interface second. The same MVVM pattern holds in XML and in Compose, and it carries over to Kotlin Multiplatform.</p>
+      </div>
+    </article>
+  </div>
+
+  <footer class="foot mono">
+    <span>© 2026 Ilham Maulana</span>
+    <span>v1.0.0 (build 2) · HTML, CSS, JS</span>
+  </footer>
+
+</div>
+</div>
+
+<script>
+(function(){
+  var site = document.getElementById('site');
+  var root = document.documentElement;
+  var home = document.getElementById('home');
+  var reader = document.getElementById('reader');
+
+  /* ---- Bahasa ---- */
+  function setLang(lang, save){
+    site.setAttribute('data-lang', lang);
+    root.lang = lang;
+    document.querySelectorAll('[data-set-lang]').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+    });
+    if (save) { try { localStorage.setItem('lang', lang); } catch (e) {} }
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  if (saved === 'en' || saved === 'id') setLang(saved, false);
+  document.querySelectorAll('[data-set-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set-lang'), true); });
+  });
+
+  /* ---- Tema ---- */
+  try { var savedTheme = localStorage.getItem('theme'); if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme); } catch (e) {}
+  document.getElementById('theme-toggle').addEventListener('click', function(){
+    var current = root.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  /* ---- Tab di layar ponsel ---- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function selectTab(tab, focus){
+    tabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ selectTab(t, false); });
+    t.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight') selectTab(tabs[(i + 1) % tabs.length], true);
+      if (e.key === 'ArrowLeft') selectTab(tabs[(i - 1 + tabs.length) % tabs.length], true);
+    });
+  });
+
+  /* ---- Tampilan baca tulisan ---- */
+  var posts = Array.prototype.slice.call(reader.querySelectorAll('.post'));
+  function showPost(slug){
+    var found = false;
+    posts.forEach(function(p){
+      var on = p.getAttribute('data-post') === slug;
+      p.hidden = !on;
+      if (on) found = true;
+    });
+    if (!found) return showHome();
+    home.hidden = true;
+    reader.hidden = false;
+    window.scrollTo(0, 0);
+  }
+  function showHome(){
+    reader.hidden = true;
+    home.hidden = false;
+  }
+  function route(){
+    var h = (location.hash || '').slice(1);
+    if (h.indexOf('baca-') === 0) { showPost(h.slice(5)); return; }
+    var wasReading = !reader.hidden;
+    showHome();
+    if (wasReading && h) {
+      var el = document.getElementById(h);
+      if (el) el.scrollIntoView();
+    }
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var h = a.getAttribute('href').slice(1);
+    if (h.indexOf('baca-') === 0) { showPost(h.slice(5)); return; }
+    if (!reader.hidden) {
+      showHome();
+      var el = document.getElementById(h);
+      if (el) requestAnimationFrame(function(){ el.scrollIntoView(); });
+    }
+  });
+  window.addEventListener('hashchange', route);
+  if ((location.hash || '').indexOf('#baca-') === 0) route();
+
+  /* ---- Salin email ---- */
+  var copyBtn = document.getElementById('copy-mail');
+  var addr = document.getElementById('mail-addr');
+  function selectAddr(){
+    var r = document.createRange(); r.selectNodeContents(addr);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+  copyBtn.addEventListener('click', function(){
+    var idle = copyBtn.querySelector('.copy-idle'), done = copyBtn.querySelector('.copy-done');
+    function ok(){
+      idle.hidden = true; done.hidden = false;
+      setTimeout(function(){ idle.hidden = false; done.hidden = true; }, 1800);
+    }
+    try {
+      navigator.clipboard.writeText(addr.textContent.trim()).then(ok, selectAddr);
+    } catch (e) { selectAddr(); }
+  });
+})();
+</script>
+</body>
+</html>
